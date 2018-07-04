@@ -39,6 +39,8 @@ function s:WildignoreFromGitignore(...)
     let igstring = ''
     for oline in readfile(gitignore)
       let line = substitute(oline, '\s|\n|\r', '', "g")
+      " Escape files with comma in it
+      let line = substitute(line, ",", '\\,', "g")
       if line =~ '^#' | con | endif
       if line == ''   | con | endif
       if line =~ '^!' | con | endif
